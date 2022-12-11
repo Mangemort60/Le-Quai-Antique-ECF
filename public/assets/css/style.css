@@ -1,0 +1,15 @@
+/*edit Header by overriding bootstrap css*/
+.navbar-collapse {
+    flex-grow: 0;
+}
+.navbar-nav {
+    padding: 0;
+}
+
+/*Home*/
+
+.homeTitle {
+    text-align: center;
+    margin-top: 50px;
+    font-weight: lighter;
+}
