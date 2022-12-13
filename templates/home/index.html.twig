@@ -3,6 +3,12 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<h1 class="homeTitle">Le Chef Michant vous souhaite la bienvenue</h1>
-
+    <div class="container">
+    <h1 class="homeTitle">Le Chef Michant vous souhaite la bienvenue</h1>
+    <div class="grid">
+        {% for plats in plat %}
+        <img src="{{ asset('uploads/photos/' ~ plats.imageName )}}" alt="Sample photo">
+        {% endfor %}
+    </div>
+    </div>
 {% endblock %}
