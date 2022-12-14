@@ -3,12 +3,36 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container d-flex flex-column align-items-center">
     <h1 class="homeTitle">Le Chef Michant vous souhaite la bienvenue</h1>
-    <div class="grid">
+    <div class="grid mb-4">
         {% for plats in plat %}
         <img src="{{ asset('uploads/photos/' ~ plats.imageName )}}" alt="Sample photo">
         {% endfor %}
     </div>
+{#        <button type="button" id="myBtn" class="btn btn-primary btn-lg mt-4" href="" >Reservez</button>#}
+    <button class="d-block mt-5 btn btn-primary mx-auto" data-bs-toggle="modal" data-bs-target="#modal1"> Reservez </button>
+
+    <div class="modal fade" id="modal1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" aria-labelledby="modal title">
+                        Reservez
+                    </h5>
+                    <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                </div>
+                <div class="modal-body" aria-describedby="content">
+                    <p>{{ form(form) }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary">save</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
     </div>
 {% endblock %}
