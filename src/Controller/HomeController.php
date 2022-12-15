@@ -18,13 +18,13 @@ class HomeController extends AbstractController
     public function index(PlatsRepository $platsRepository): Response
     {
 
-        $plats = $platsRepository->findAll();
+        $plat = $platsRepository->findAll();
         $reservation = new Reservations();
         $form = $this->createForm(ReservationType::class, $reservation);
 
 
         return $this->render('home/index.html.twig', [
-            'plat' => $plats,
+            'plats' => $plat,
             'form' => $form->createView()
         ]);
     }

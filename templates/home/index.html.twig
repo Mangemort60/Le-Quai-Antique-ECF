@@ -1,17 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
-
 {% block body %}
-    <div class="container d-flex flex-column align-items-center">
-    <h1 class="homeTitle">Le Chef Michant vous souhaite la bienvenue</h1>
-    <div class="grid mb-4">
-        {% for plats in plat %}
-        <img src="{{ asset('uploads/photos/' ~ plats.imageName )}}" alt="Sample photo">
+{#            Gallerie#}
+
+
+{#    <div class="container d-flex flex-column align-items-center">#}
+    <h1>Le Chef Michant vous souhaite la bienvenue</h1>
+    <div class="gallerie">
+        {% for plat in plats %}
+        <div class="photo-item m-2">
+            <img  class="image" src="{{ asset('uploads/photos/' ~ plat.imageName )}}" >
+            <div class="middle">
+                <h3 class="text">{{ plat.titre }}</h3>
+            </div>
+        </div>
         {% endfor %}
     </div>
-{#        <button type="button" id="myBtn" class="btn btn-primary btn-lg mt-4" href="" >Reservez</button>#}
-    <button class="d-block mt-5 btn btn-primary mx-auto" data-bs-toggle="modal" data-bs-target="#modal1"> Reservez </button>
+{#            Modal reservation#}
 
     <div class="modal fade" id="modal1">
         <div class="modal-dialog">
@@ -25,9 +30,7 @@
                 <div class="modal-body" aria-describedby="content">
                     <p>{{ form(form) }}</p>
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary">save</button>
-                </div>
+
 
             </div>
         </div>
@@ -35,4 +38,6 @@
     </div>
 
     </div>
+
 {% endblock %}
+

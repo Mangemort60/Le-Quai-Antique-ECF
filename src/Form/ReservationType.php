@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Reservations;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,6 +16,7 @@ class ReservationType extends AbstractType
             ->add('nbrCouvert')
             ->add('date')
             ->add('allergie')
+            ->add('soumettre', SubmitType::class)
 //            ->add('User')
         ;
     }
