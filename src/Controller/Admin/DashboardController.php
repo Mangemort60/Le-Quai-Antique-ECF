@@ -2,10 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Horaires;
+use App\Entity\Menus;
 use App\Entity\Plats;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use PhpParser\Node\Expr\Yield_;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,5 +48,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-dashboard');
         yield MenuItem::linkToCrud('Plats', 'fas fa-list', Plats::class);
+        Yield MenuItem::linkToCrud('Horaires', 'fas fa-clock', Horaires::class);
+        Yield MenuItem::linkToCrud('Menus', 'fas fa-utensils', Menus::class);
     }
 }

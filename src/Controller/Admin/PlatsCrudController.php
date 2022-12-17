@@ -8,7 +8,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
@@ -24,8 +26,8 @@ class PlatsCrudController extends AbstractCrudController
     {
         return [
             TextField::new('titre'),
-            TextField::new('description'),
-            NumberField::new('prix'),
+            TextEditorField::new('description'),
+            IntegerField::new('prix'),
             ChoiceField::new('categorie')->setChoices([
                 'entrée' => 'entrée',
                 'plat' => 'plat',
