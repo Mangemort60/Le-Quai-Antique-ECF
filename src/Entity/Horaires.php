@@ -110,5 +110,10 @@ class Horaires
 
         return $this;
     }
+//
+//    public function __toString()  {
+//        return $this->
+//    }
+
 
 }

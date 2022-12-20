@@ -19,7 +19,7 @@ class MenusCrudController extends AbstractCrudController
     {
         return [
             TextField::new('titre'),
-            TextEditorField::new('description'),
+            TextField::new('description'),
             IntegerField::new('prix'),
         ];
     }

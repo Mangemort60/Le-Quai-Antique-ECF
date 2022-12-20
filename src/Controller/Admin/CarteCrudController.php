@@ -2,23 +2,20 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Plats;
+use App\Entity\Carte;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class PlatsCrudController extends AbstractCrudController
+class CarteCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Plats::class;
+        return Carte::class;
     }
 
 
@@ -26,7 +23,7 @@ class PlatsCrudController extends AbstractCrudController
     {
         return [
             TextField::new('titre'),
-            TextEditorField::new('description'),
+            TextField::new('description'),
             IntegerField::new('prix'),
             ChoiceField::new('categorie')->setChoices([
                 'entrée' => 'entrée',

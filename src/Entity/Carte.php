@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\PlatsRepository;
+use App\Repository\CarteRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
-#[ORM\Entity(repositoryClass: PlatsRepository::class)]
+#[ORM\Entity(repositoryClass: CarteRepository::class)]
 #[Vich\Uploadable]
-class Plats
+class Carte
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
