@@ -5,37 +5,42 @@
 
 
 {#    <div class="container d-flex flex-column align-items-center">#}
-    <h1>Le Chef Michant vous souhaite la bienvenue</h1>
-    <div class="gallerie">
-        {% for plat in plats %}
-        <div class="photo-item m-2">
-            <img  class="image" src="{{ asset('uploads/photos/' ~ plat.imageName )}}" >
-            <div class="middle">
-                <h3 class="text">{{ plat.titre }}</h3>
-            </div>
+    <div class="container">
+        <h1>Le Chef Michant vous souhaite la bienvenue</h1>
+        <div class="gallerie">
+            {% for plat in plats %}
+                {% if plat.favoris == true %}
+                    <div class="photo-item m-2">
+                        <img  class="image" src="{{ asset('uploads/photos/' ~ plat.imageName )}}" >
+                        <div class="middle">
+                            <h3 class="text">{{ plat.titre }}</h3>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
-{#            Modal reservation#}
+        {#            Modal reservation#}
 
-    <div class="modal fade" id="modal1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" aria-labelledby="modal title">
-                        Reservez
-                    </h5>
-                    <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+        <div class="modal fade" id="modal1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" aria-labelledby="modal title">
+                            Reservez
+                        </h5>
+                        <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                    </div>
+                    <div class="modal-body" aria-describedby="content">
+                        <p>{{ form(form) }}</p>
+                    </div>
+
+
                 </div>
-                <div class="modal-body" aria-describedby="content">
-                    <p>{{ form(form) }}</p>
-                </div>
-
-
             </div>
+
         </div>
 
-    </div>
 
+    </div>
 {% endblock %}
 

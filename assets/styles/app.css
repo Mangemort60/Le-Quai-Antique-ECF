@@ -12,10 +12,11 @@ html {
 }
 
 footer {
-    position:relative;
-    bottom:0;
+    position: relative;
+    bottom:-150px;
     width:100%;
     height:auto;
+
 
 }
 
@@ -31,12 +32,16 @@ footer {
 
 h1 {
     text-align: center;
-    margin-top: 50px;
     font-weight: lighter;
+    margin: 100px;
+    font-size: 3rem;
+
 }
 
 .gallerie {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
 
 }
@@ -50,8 +55,8 @@ h1 {
 .photo-item img {
     display: block;
     max-width: 300px;
-    max-height: 400px;
-    width: auto;
+    max-height: 300px;
+    width: 300px;
     height: auto;
 
 }
@@ -90,24 +95,34 @@ h1 {
 
 /*La Carte*/
 
+
+
 #card {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin: 20px;
+    -webkit-box-shadow: 1px 1px 9px -3px #C2C2C2;
+    box-shadow: 1px 1px 9px -3px #C2C2C2;
+    width: 600px;
+    height: 300px;
 
 }
 
 .img-card {
     display: block;
-    height: 400px;
-    width: auto;
+    height: 100%;
+    width: 50%;
 
 }
 
 .card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 10px;
-    width: 400px;
+    width: 50%;
+    height: auto;
 }
 
 .card-title {
@@ -117,6 +132,7 @@ h1 {
 .description {
     font-style: italic;
     color: darkgray;
+    text-align: center;
 }
 
 
