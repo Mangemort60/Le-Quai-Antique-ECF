@@ -5,7 +5,7 @@
 
 
 {#    <div class="container d-flex flex-column align-items-center">#}
-    <div class="container">
+    <div class="container d-flex flex-column align-items-center">
         <h1>Le Chef Michant vous souhaite la bienvenue</h1>
         <div class="gallerie">
             {% for plat in plats %}
@@ -18,7 +18,10 @@
                     </div>
                 {% endif %}
             {% endfor %}
+
         </div>
+    <button type="button" class="btn btn-primary btn-lg mt-4" data-bs-toggle="modal" data-bs-target="#modal1">Reservez</button>
+
         {#            Modal reservation#}
 
         <div class="modal fade" id="modal1">

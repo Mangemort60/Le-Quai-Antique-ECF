@@ -125,8 +125,8 @@ h1 {
     height: auto;
 }
 
-.card-title {
-    font-weight: bolder;
+h3 {
+    font-weight: normal;
 }
 
 .description {
