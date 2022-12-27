@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Reservations;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TimeField;
@@ -25,6 +26,7 @@ class ReservationsCrudController extends AbstractCrudController
             DateTimeField::new('Date')->setFormat('dd.MM.yyyy')->setTimezone('Europe/Paris'),
             TimeField::new('heure')->setFormat('HH:mm')->setTimezone('Europe/Paris'),
             TextField::new('allergie'),
+            TextField::new('clientEmail')
         ];
     }
 

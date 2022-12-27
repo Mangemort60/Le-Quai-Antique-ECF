@@ -29,6 +29,9 @@ class Reservations
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $heure = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $clientEmail = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class Reservations
     public function setHeure(\DateTimeInterface $heure): self
     {
         $this->heure = $heure;
+
+        return $this;
+    }
+
+    public function getClientEmail(): ?string
+    {
+        return $this->clientEmail;
+    }
+
+    public function setClientEmail(?string $clientEmail): self
+    {
+        $this->clientEmail = $clientEmail;
 
         return $this;
     }

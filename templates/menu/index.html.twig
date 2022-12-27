@@ -3,8 +3,9 @@
 {% block title %}Hello MenuController!{% endblock %}
 
 {% block body %}
-<h1>Nos menus</h1>
-<div class="container">
+
+<div class="container d-flex flex-column justify-content-center align-items-center mb-4 h-100">
+    <h1>Nos menus</h1>
     <div class="d-flex flex-wrap">
         {% for menu in menus %}
         <div id="card">
