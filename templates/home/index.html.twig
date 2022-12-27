@@ -7,6 +7,9 @@
 {#    <div class="container d-flex flex-column align-items-center">#}
     <div class="container d-flex flex-column align-items-center">
         <h1>Le Chef Michant vous souhaite la bienvenue</h1>
+{% for message in app.flashes('full') %}
+    <div class="alert alert-danger mb-4"> {{ message }}</div>
+{% endfor %}
         <div class="gallerie">
             {% for plat in plats %}
                 {% if plat.favoris == true %}
@@ -34,7 +37,8 @@
                         <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
                     </div>
                     <div class="modal-body" aria-describedby="content">
-                        <p>{{ form(form) }}</p>
+
+                        <p>{{ form(form, {'autocomplete' : 'off'}) }}</p>
                     </div>
 
 

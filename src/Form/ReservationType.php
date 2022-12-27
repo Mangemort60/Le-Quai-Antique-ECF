@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Reservations;
+use App\Validators\Constraints\NoAvailableReservations;
+use phpDocumentor\Reflection\Types\Nullable;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -12,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class ReservationType extends AbstractType
 {
@@ -23,28 +26,32 @@ class ReservationType extends AbstractType
                 'label' => 'Nombre de couvert'
             ])
             ->add('date', DateType::class, [
+                'html5' => false,
                 'placeholder' => [
                     'year' => 'Year',
                     'month' => 'Month',
                     'day' => 'Day',
                 ],
+                'model_timezone' => 'Europe/Paris',
+                'data' => null,
             ])
             ->add('heure', TimeType::class,
                 [
                     'input_format' => 'H:m',
                     'input'  => 'datetime',
                     'widget' => 'choice',
-                    'hours' => ['12', '13', '14'],
+                    'hours' => ['12', '13', '14', '19', '20', '21'],
                     'minutes' => ['00', '15','30','45']
-
-
 
 
                 ]
 
             )
-            ->add('allergie', TextType::class, [
-                'label' => 'Eventuelles allergies'
+            ->add('allergie', TextType::class,[
+                'required' => false,
+                'label' => 'Eventuelles allergies',
+
+
             ])
             ->add('soumettre', SubmitType::class)
 //            ->add('User')

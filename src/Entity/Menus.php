@@ -16,11 +16,24 @@ class Menus
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $description = null;
 
     #[ORM\Column]
     private ?int $prix = null;
+
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $formuleUne = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $formuleDeux = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $descriptionFormuleDeux = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $descriptionFormuleUne = null;
+
+
 
     public function getId(): ?int
     {
@@ -40,17 +53,6 @@ class Menus
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 
     public function getPrix(): ?int
     {
@@ -63,4 +65,55 @@ class Menus
 
         return $this;
     }
+
+
+    public function getFormuleUne(): ?string
+    {
+        return $this->formuleUne;
+    }
+
+    public function setFormuleUne(?string $formuleUne): self
+    {
+        $this->formuleUne = $formuleUne;
+
+        return $this;
+    }
+
+    public function getFormuleDeux(): ?string
+    {
+        return $this->formuleDeux;
+    }
+
+    public function setFormuleDeux(?string $formuleDeux): self
+    {
+        $this->formuleDeux = $formuleDeux;
+
+        return $this;
+    }
+
+    public function getDescriptionFormuleDeux(): ?string
+    {
+        return $this->descriptionFormuleDeux;
+    }
+
+    public function setDescriptionFormuleDeux(?string $descriptionFormuleDeux): self
+    {
+        $this->descriptionFormuleDeux = $descriptionFormuleDeux;
+
+        return $this;
+    }
+
+    public function getDescriptionFormuleUne(): ?string
+    {
+        return $this->descriptionFormuleUne;
+    }
+
+    public function setDescriptionFormuleUne(?string $descriptionFormuleUne): self
+    {
+        $this->descriptionFormuleUne = $descriptionFormuleUne;
+
+        return $this;
+    }
+
+
 }

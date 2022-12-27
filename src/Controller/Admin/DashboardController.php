@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Horaires;
 use App\Entity\Menus;
 use App\Entity\Carte;
+use App\Entity\PlacesMax;
 use App\Entity\Reservations;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -52,5 +53,7 @@ class DashboardController extends AbstractDashboardController
         Yield MenuItem::linkToCrud('Horaires', 'fas fa-clock', Horaires::class);
         Yield MenuItem::linkToCrud('Menus', 'fas fa-utensils', Menus::class);
         Yield MenuItem::linkToCrud('Reservation', 'fas fa-list', Reservations::class);
+        Yield MenuItem::linkToCrud('PlacesMax', 'fa-solid fa-chair', PlacesMax::class);
+
     }
 }

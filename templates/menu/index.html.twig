@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MenuController!{% endblock %}
+
+{% block body %}
+<h1>Nos menus</h1>
+<div class="container">
+    <div class="d-flex flex-wrap">
+        {% for menu in menus %}
+        <div id="card">
+            <div class="w-50 d-flex justify-content-center align-items-center">
+                <h3>{{ menu.titre }}</h3>
+            </div>
+            <div class="card-info w-50 d-flex justify-content-center align-items-center">
+                <h3 class="card-title">{{ menu.formuleUne }}</h3>
+                <p class="description">{{ menu.descriptionFormuleUne }}</p>
+                {% if menu.formuleDeux %}
+                <h3 class="card-title">{{ menu.formuleDeux }}</h3>
+                <p class="description">{{ menu.descriptionFormuleDeux }}</p>
+                {% endif %}
+                <p class="price">{{ menu.prix }}€</p>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

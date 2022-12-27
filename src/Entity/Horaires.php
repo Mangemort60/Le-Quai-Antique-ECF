@@ -33,6 +33,7 @@ class Horaires
     #[ORM\Column]
     private ?bool $Ouvert = null;
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,10 +111,7 @@ class Horaires
 
         return $this;
     }
-//
-//    public function __toString()  {
-//        return $this->
-//    }
+
 
 
 }
