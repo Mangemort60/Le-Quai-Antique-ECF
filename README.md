@@ -83,8 +83,16 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 MariaDB [(none)]>
    ```
 
-   5. Sélectionnez la base de données à laquelle vous souhaitez accéder en utilisant la commande USE :
+5. Sélectionnez la base de données à laquelle vous souhaitez accéder en utilisant la commande USE :
 
 ```console
 USE nom_de_la_base_de_données;
 ```
+
+6. Créez un utilisateur avec le rôle admin en utilisant la commande INSERT INTO 
+
+```console
+INSERT INTO user (username, password, roles) VALUES ('admin', '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', '["ROLE_ADMIN"]');
+```
+
+*Note : Pour hascher le mot de passe vous pouvez utiliser l'utilitaire en ligne [Bcrypt](https://www.bcrypt.fr/)*
