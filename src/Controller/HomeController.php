@@ -43,7 +43,7 @@ class HomeController extends AbstractController
         $reservation->setDate(new \DateTime());
 
         // on récupère le user et ses infos allergie, et nombre de couvert
-        if($this->isGranted('IS_AUTHENTICATED_FULLY')){
+        if($this->isGranted('IS_AUTHENTICATED_FULLY' or $this->isGranted('ROLE_ADMIN'))){
             $user = $security->getUser();
             $allergieUser = $user->getAllergies();
             $nbrCouvertUser = $user->getNbrConvive();
