@@ -3,57 +3,71 @@
 {% block title %}La Carte{% endblock %}
 
 {% block body %}
-    <div class="container d-flex flex-column justify-content-center align-items-center mb-4">
-        <h1>Entrées</h1>
-        <div class="d-flex flex-wrap">
-            {% for plat in plats %}
-                {% if plat.categorie == "entrée" %}
-                    <div id="card">
-                        <img class="img-card" src="{{ asset('uploads/photos/' ~ plat.imageName )}}" alt="{{ plat.titre }}">
-                        <div class="card-info d-flex flex-column justify-content-center align-items-center">
-                            <h3 class="card-title">{{ plat.titre }}</h3>
-                            <p class="description">{{ plat.description }}</p>
-                            <p class="price">{{ plat.prix }}€</p>
-                        </div>
 
-                    </div>
-                {% endif %}
-            {% endfor %}
+    <div class="container d-flex flex-column justify-content-center align-items-center mb-4 mt-4">
+        <div class="button-list mt-5 mb-4 w-100 d-flex justify-content-evenly">
+            <button type="button" class="btn btn-outline-success btn-filter" data-filter="all" >Tout</button>
+            <button type="button" class="btn btn-outline-success btn-filter" data-filter="entrees">Entrées</button>
+            <button type="button" class="btn btn-outline-success btn-filter" data-filter="plats">Plats</button>
+            <button type="button" class="btn btn-outline-success btn-filter" data-filter="desserts">Desserts</button>
+        </div>
+        <div class="categorie-section" data-category="entrees">
+            <h1>Entrées</h1>
+            <div class="d-flex flex-wrap">
+                {% for plat in plats %}
+                    {% if plat.categorie == "entrée" %}
+                        <div id="card">
+                            <img class="img-card" src="{{ asset('uploads/photos/' ~ plat.imageName )}}" alt="{{ plat.titre }}">
+                            <div class="card-info d-flex flex-column justify-content-center align-items-center">
+                                <h3 class="card-title">{{ plat.titre }}</h3>
+                                <p class="description">{{ plat.description }}</p>
+                                <p class="price">{{ plat.prix }}€</p>
+                            </div>
+
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
 
-        <h1>Plats</h1>
-        <div class="d-flex flex-wrap">
-            {% for plat in plats %}
-                {% if plat.categorie == "plat" %}
-                    <div id="card">
-                        <img class="img-card" src="{{ asset('uploads/photos/' ~ plat.imageName )}}" alt="{{ plat.titre }}">
-                        <div class="card-info">
-                            <h3 class="card-title">{{ plat.titre }}</h3>
-                            <p class="description">{{ plat.description }}</p>
-                            <p class="price">{{ plat.prix }}€</p>
-                        </div>
+        <div class="categorie-section" data-category="plats">
+            <h1>Plats</h1>
+            <div class="d-flex flex-wrap">
+                {% for plat in plats %}
+                    {% if plat.categorie == "plat" %}
+                        <div id="card">
+                            <img class="img-card" src="{{ asset('uploads/photos/' ~ plat.imageName )}}" alt="{{ plat.titre }}">
+                            <div class="card-info">
+                                <h3 class="card-title">{{ plat.titre }}</h3>
+                                <p class="description">{{ plat.description }}</p>
+                                <p class="price">{{ plat.prix }}€</p>
+                            </div>
 
-                    </div>
-                {% endif %}
-            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
 
-        <h1>Desserts</h1>
-        <div class="d-flex flex-wrap">
-            {% for plat in plats %}
-                {% if plat.categorie == "dessert" %}
-                    <div id="card">
-                        <img class="img-card" src="{{ asset('uploads/photos/' ~ plat.imageName )}}" alt="{{ plat.titre }}">
-                        <div class="card-info">
-                            <h3 class="card-title">{{ plat.titre }}</h3>
-                            <p class="description">{{ plat.description }}</p>
-                            <p class="price">{{ plat.prix }}€</p>
-                        </div>
+        <div class="categorie-section" data-category="desserts">
+            <h1>Desserts</h1>
+            <div class="d-flex flex-wrap">
+                {% for plat in plats %}
+                    {% if plat.categorie == "dessert" %}
+                        <div id="card">
+                            <img class="img-card" src="{{ asset('uploads/photos/' ~ plat.imageName )}}" alt="{{ plat.titre }}">
+                            <div class="card-info">
+                                <h3 class="card-title">{{ plat.titre }}</h3>
+                                <p class="description">{{ plat.description }}</p>
+                                <p class="price">{{ plat.prix }}€</p>
+                            </div>
 
-                    </div>
-                {% endif %}
-            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
+
 
     </div>
 
