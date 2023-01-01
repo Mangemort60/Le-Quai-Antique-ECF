@@ -33,7 +33,7 @@ class ReservationType extends AbstractType
                     'day' => 'Day',
                 ],
                 'model_timezone' => 'Europe/Paris',
-                'data' => null,
+                'data' => new \DateTime(),
             ])
             ->add('heure', TimeType::class,
                 [
