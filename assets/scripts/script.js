@@ -12,7 +12,7 @@ filterButtons.forEach(button => {
         const items = document.querySelectorAll('.categorie-section');
 
 
-        // tout afficher si all est selectionné
+        // tout afficher si all est séléctionné
         if (filter === 'all') {
             items.forEach(item => item.style.display = 'block');
         } else {
