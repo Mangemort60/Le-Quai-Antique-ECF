@@ -47,7 +47,7 @@ class HomeController extends AbstractController
             $user = $security->getUser();
             $allergieUser = $user->getAllergies();
             $nbrCouvertUser = $user->getNbrConvive();
-            $reservation->setNbrCouvert($nbrCouvertUser);
+            $reservation->setNbrCouvert(intval($nbrCouvertUser)); // setNbrCouvert demande un integer, mais si la valeur est null pour le user alors cela declenche une erreur, j'ai donc utiliser la methode intval()
             $reservation->setAllergie($allergieUser);
         }
 
