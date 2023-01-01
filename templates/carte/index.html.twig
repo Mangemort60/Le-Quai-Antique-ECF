@@ -37,7 +37,7 @@
                     {% if plat.categorie == "plat" %}
                         <div id="card">
                             <img class="img-card" src="{{ asset('uploads/photos/' ~ plat.imageName )}}" alt="{{ plat.titre }}">
-                            <div class="card-info">
+                            <div class="card-info d-flex flex-column justify-content-center align-items-center">
                                 <h3 class="card-title">{{ plat.titre }}</h3>
                                 <p class="description">{{ plat.description }}</p>
                                 <p class="price">{{ plat.prix }}€</p>
@@ -56,7 +56,7 @@
                     {% if plat.categorie == "dessert" %}
                         <div id="card">
                             <img class="img-card" src="{{ asset('uploads/photos/' ~ plat.imageName )}}" alt="{{ plat.titre }}">
-                            <div class="card-info">
+                            <div class="card-info d-flex flex-column justify-content-center align-items-center">
                                 <h3 class="card-title">{{ plat.titre }}</h3>
                                 <p class="description">{{ plat.description }}</p>
                                 <p class="price">{{ plat.prix }}€</p>
