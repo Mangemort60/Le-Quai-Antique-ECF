@@ -6,20 +6,20 @@ const filterButtons = Array.from(document.querySelectorAll('.btn-filter'));
 // event listener
 filterButtons.forEach(button => {
     button.addEventListener('click', e => {
-        // Get the selected filter
+        // récupère la valeur de l'attribut data-filter du boutton
         const filter = e.target.dataset.filter;
-
-        // Get the items
+        // récupère les élements à modifier par la suite
         const items = document.querySelectorAll('.categorie-section');
 
-        // Show all items if the "all" filter is selected
+
+        // tout afficher si all est selectionné
         if (filter === 'all') {
             items.forEach(item => item.style.display = 'block');
         } else {
-            // Hide all items
+            // sinon cacher tout les éléments
             items.forEach(item => item.style.display = 'none');
 
-            // Show only the items with the selected filter
+            // et ne montrer que celui qui est séléctionné
             document.querySelectorAll(`[data-category="${filter}"]`).forEach(item => item.style.display = 'block');
         }
     });
