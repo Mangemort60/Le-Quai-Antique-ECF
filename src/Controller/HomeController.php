@@ -19,6 +19,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class HomeController extends AbstractController
 {
+    private function getUserOrGuestIdentifier(Security $security): string
+    {
+        if ($security->getUser() !== null) {
+            // user connecté , retour identifiant
+            return $security->getUser()->getUserIdentifier();
+        } else {
+            // user non connecté , retourne 'guest'
+            return 'visiteur';
+        }
+    }
+
     #[Route('/', name: 'app_home')]
     public function index(CarteRepository $carteRepository,
                           Request $request,
@@ -76,7 +87,7 @@ class HomeController extends AbstractController
         // on verifie is le formulaire est valide, si il est soumis, et si il y a assez de couvert disponible à la date selectionnée.
         if ($form->isSubmitted() && $form->isValid() && $maxReservationPerDayValue >= ($nbrCouvertParJour + $nbrCouvertSelectionne)) {
             // on récupère le mail du client
-            $mailUser = $security->getUser()->getUserIdentifier();
+            $mailUser = $this->getUserOrGuestIdentifier($security);
             // on l'ajoute à la reservation
             $reservation->setClientEmail($mailUser);
             // on persist
