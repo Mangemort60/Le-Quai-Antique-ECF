@@ -116,6 +116,8 @@ h1 {
     #card {
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
         flex-wrap: nowrap;
         margin: 20px;
         -webkit-box-shadow: 1px 1px 9px -3px #C2C2C2;
