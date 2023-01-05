@@ -93,6 +93,7 @@ class HomeController extends AbstractController
             // on persist
             $entityManager->persist($reservation);
             $entityManager->flush();
+            $this->addFlash('success', 'Merci, votre réservation a bien été prise en compte');
             return $this->redirectToRoute('app_home');
         }
         // sinon on affiche un message d'erreur.
