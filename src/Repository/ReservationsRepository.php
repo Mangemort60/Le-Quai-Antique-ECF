@@ -39,49 +39,33 @@ class ReservationsRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Reservations[] Returns an array of Reservations objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Reservations[] Returns an array of Reservations objects
+     */
+    public function findByExampleField($value): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.exampleField = :val')
+            ->setParameter('val', $value)
+            ->orderBy('r.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
-//    public function findOneBySomeField($value): ?Reservations
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-
-//    public function checkAvailability($date)
-//    {
-//        // Create a query builder
-//        $qb = $this->createQueryBuilder('r');
-//
-//        // Count the number of reservations for the given date
-//        $qb->select('count(r.id)')
-//            ->where('r.date = :date')
-//            ->setParameter('date', $date);
-//
-//        // Execute the query and get the result
-//        $count = $qb->getQuery()->getSingleScalarResult();
-//
-//        // Return true if the count is less than the maximum, false otherwise
-//        return $count < 4;
-//    }
+    public function findOneBySomeField($value): ?Reservations
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.exampleField = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 
 
+// Compte le nombre de couverts à une date donnée
     public function countNbrCouvertForDate(string $date): int
     {
         $qb = $this->createQueryBuilder('r')
