@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Reservations;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 
 /**
  * @extends ServiceEntityRepository<Reservations>
@@ -65,14 +66,31 @@ class ReservationsRepository extends ServiceEntityRepository
     }
 
 
-// Compte le nombre de couverts à une date donnée
-    public function countNbrCouvertForDate(string $date): int
+// Compte le nombre de couverts à une date donnée pour le service du midi
+    public function countNbrCouvertDateMidi(string $date, string $heure ): int
     {
         $qb = $this->createQueryBuilder('r')
             ->select('SUM(r.nbrCouvert)')
             ->where('r.date = :date')
-            ->setParameter('date', $date);
+            ->andWhere('r.heure < :heure')
+            ->setParameter('date', $date)
+            ->setParameter('heure', $heure);
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
+
+// Compte le nombre de couverts à une date donnée pour le service du soir
+    public function countNbrCouvertDateSoir(string $date, string $heure): int
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->select('SUM(r.nbrCouvert)')
+            ->where('r.date = :date')
+            ->andWhere('r.heure > :heure')
+            ->setParameter('date', $date)
+            ->setParameter('heure', $heure);
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+
 }

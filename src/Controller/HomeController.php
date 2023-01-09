@@ -9,10 +9,12 @@ use App\Repository\PlacesMaxRepository;
 use App\Repository\ReservationsRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class HomeController extends AbstractController
 {
@@ -52,6 +54,7 @@ class HomeController extends AbstractController
         // Création d'une nouvelle instance de l'entité Reservations
         $reservation = new Reservations();
         $reservation->setDate(new \DateTime()); // Permet de mettre une date par défaut au formulaire de réservation
+        $reservation->setHeure(new \DateTime());
 
         // Récupère l'information enregistrée par défaut (Nombre de convives/allergies) par l'utilisateur connecté lors de son inscription
         if($this->isGranted('IS_AUTHENTICATED_FULLY') || $this->isGranted('ROLE_ADMIN')){
@@ -71,17 +74,26 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
         $data = $form->getData();
         $reservationDate = $data->getDate();
+        $reservationHeure = $data->getHeure();
         $nbrCouvertSelectionne = $data->getnbrCouvert();
 
-        // Formatage de la date pour qu'elle puisse être passée au custom QueryBuilder countNbrCouvertForDate()
+        // Formatage de la date et l'heure pour qu'elle puisse être passée au custom QueryBuilder countNbrCouvertForDate()
         $reservationDate = $reservationDate->format('Y-m-d');
+        $reservationHeure = $reservationHeure->format('H:m:s');
 
-        // Recuperation du nombre de couverts à une date sélectionnée
-        $nbrCouvertDateSelection = $reservationsRepository->countNbrCouvertForDate($reservationDate);
+        // Recuperation du nombre de couverts à une date sélectionnée pour le service du midi
+        $nbrCouvertMidi = $reservationsRepository->countNbrCouvertDateMidi($reservationDate, $reservationHeure );
 
+        // Recuperation du nombre de couverts à une date sélectionnée pour le service du soir
+        $nbrCouvertSoir = $reservationsRepository->countNbrCouvertDateSoir($reservationDate, $reservationHeure);
+//        dd($nbrCouvertSoir);
 
         // Vérifie si formulaire valide, et si assez de place à la date sélectionnée
-        if ($form->isSubmitted() && $form->isValid() && $maxReservationPerDayValue >= ($nbrCouvertDateSelection + $nbrCouvertSelectionne)) {
+        if ($form->isSubmitted()
+            && $form->isValid()
+            && $maxReservationPerDayValue >= ($nbrCouvertMidi + $nbrCouvertSelectionne)
+            && $maxReservationPerDayValue >= ($nbrCouvertSoir + $nbrCouvertSelectionne))
+        {
             // Recuperation de l'email du client
             $mailUser = $this->getUserOrGuestIdentifier($security);
             $reservation->setClientEmail($mailUser);
@@ -93,9 +105,10 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
         // Sinon affiche un message d'erreur.
-        elseif ($maxReservationPerDayValue <= ($nbrCouvertDateSelection + $nbrCouvertSelectionne)) {
+        elseif ($maxReservationPerDayValue < ($nbrCouvertMidi + $nbrCouvertSelectionne) || $maxReservationPerDayValue < ($nbrCouvertSoir + $nbrCouvertSelectionne) ) {
+//            dd($nbrCouvertMidi , $nbrCouvertSoir);
             $this->addFlash('full', 'Il n\'y a plus de place disponible à cette date');
-            $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_home');
         }
 
         // On retourne le rendu twig auquel on passe les produits de la carte et le formulaire
