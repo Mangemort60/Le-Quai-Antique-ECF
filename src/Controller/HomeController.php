@@ -88,7 +88,7 @@ class HomeController extends AbstractController
         $nbrCouvertSoir = $reservationsRepository->countNbrCouvertDateSoir($reservationDate, $reservationHeure);
 //        dd($nbrCouvertSoir);
 
-        // Vérifie si formulaire valide, et si assez de place à la date sélectionnée
+        // Vérifie si formulaire valide, et si assez de place à la date et l'heure sélectionnée
         if ($form->isSubmitted()
             && $form->isValid()
             && $maxReservationPerDayValue >= ($nbrCouvertMidi + $nbrCouvertSelectionne)
