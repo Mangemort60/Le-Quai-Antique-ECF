@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Reservations;
 use App\Form\ReservationType;
 use App\Repository\CarteRepository;
+use App\Repository\HorairesRepository;
 use App\Repository\PlacesMaxRepository;
 use App\Repository\ReservationsRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,7 @@ class HomeController extends AbstractController
                           ManagerRegistry $managerRegistry, // Gestion des entités
                           ReservationsRepository $reservationsRepository,
                           PlacesMaxRepository $placesMaxRepository,
+                          HorairesRepository $horairesRepository,
                           Security $security, // Récupère l'utilisateur connecté
     ): Response
     {
@@ -77,8 +79,18 @@ class HomeController extends AbstractController
         $reservationHeure = $data->getHeure();
         $nbrCouvertSelectionne = $data->getnbrCouvert();
 
+
+
+
+//        if ($dayOpened) {
+//            dd(true);
+//        } else {
+//            dd(false);
+//        };
+
         // Formatage de la date et l'heure pour qu'elle puisse être passée au custom QueryBuilder countNbrCouvertForDate()
         $reservationDate = $reservationDate->format('Y-m-d');
+
         $reservationHeure = $reservationHeure->format('H:m:s');
 
         // Recuperation du nombre de couverts à une date sélectionnée pour le service du midi
@@ -86,14 +98,21 @@ class HomeController extends AbstractController
 
         // Recuperation du nombre de couverts à une date sélectionnée pour le service du soir
         $nbrCouvertSoir = $reservationsRepository->countNbrCouvertDateSoir($reservationDate, $reservationHeure);
-//        dd($nbrCouvertSoir);
 
+        // Vérifie si jour selection et ouvert ou fermé
+;
+
+//        dd($dayOpened);
+        $reservationDayName = $data->getDate()->format('l');
+        $dayOpened = $horairesRepository->isOpen($reservationDayName);
         // Vérifie si formulaire valide, et si assez de place à la date et l'heure sélectionnée
         if ($form->isSubmitted()
             && $form->isValid()
             && $maxReservationPerDayValue >= ($nbrCouvertMidi + $nbrCouvertSelectionne)
-            && $maxReservationPerDayValue >= ($nbrCouvertSoir + $nbrCouvertSelectionne))
+            && $maxReservationPerDayValue >= ($nbrCouvertSoir + $nbrCouvertSelectionne)
+        )
         {
+
             // Recuperation de l'email du client
             $mailUser = $this->getUserOrGuestIdentifier($security);
             $reservation->setClientEmail($mailUser);
@@ -105,11 +124,19 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
         // Sinon affiche un message d'erreur.
-        elseif ($maxReservationPerDayValue < ($nbrCouvertMidi + $nbrCouvertSelectionne) || $maxReservationPerDayValue < ($nbrCouvertSoir + $nbrCouvertSelectionne) ) {
-//            dd($nbrCouvertMidi , $nbrCouvertSoir);
+        elseif ($maxReservationPerDayValue < ($nbrCouvertMidi + $nbrCouvertSelectionne)
+                || $maxReservationPerDayValue < ($nbrCouvertSoir + $nbrCouvertSelectionne
+                ) ) {
             $this->addFlash('full', 'Il n\'y a plus de place disponible à cette date');
             return $this->redirectToRoute('app_home');
+
         }
+//        elseif ($dayOpened === false)
+//         {
+//dd($dayOpened);
+//            $this->addFlash('closed', 'Le restaurant est fermé à cette date');
+//            return $this->redirectToRoute('app_home');
+//        }
 
         // On retourne le rendu twig auquel on passe les produits de la carte et le formulaire
         return $this->render('home/index.html.twig', [
@@ -119,6 +146,7 @@ class HomeController extends AbstractController
     }
 
 
-
+// si jour selectionné est fermé , on affiche message fermé
+// si jour selectioné
 
 }

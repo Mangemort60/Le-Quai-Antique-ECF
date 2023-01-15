@@ -13,6 +13,9 @@
 {% for message in app.flashes('success') %}
     <div class="alert alert-success mb-4"> {{ message }}</div>
 {% endfor %}
+{% for message in app.flashes('closed') %}
+    <div class="alert alert-danger mb-4"> {{ message }}</div>
+{% endfor %}
         <div class="gallerie">
             {% for plat in plats %}
                 {% if plat.favoris == true %}

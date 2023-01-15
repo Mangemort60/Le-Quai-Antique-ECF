@@ -64,5 +64,16 @@ class HorairesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+    public function  isOpen(string $jour): bool
+
+    {
+        $qb = $this->createQueryBuilder('h')
+            ->select('h.Ouvert')
+            ->where('h.jour = :jour ')
+            ->setParameter('jour', $jour);
+
+        return boolval($qb->getQuery()->getSingleScalarResult());
+    }
+
 
 }

@@ -8,15 +8,26 @@
             </div>
             <div class="col-md-3 mb-md-0 mb-3">
                 <h5 class="text-uppercase mb-4">Horaires</h5>
-                <ul class="list-unstyled d-flex flex-column align-items-start">
-                    {% for horaire in horaires %}
-                        {% if horaire.ouvert == true %}
-                    <li>{{horaire.jour}} : {{ horaire.ouvertureMidi | date('H:i') }}-{{ horaire.fermetureMidi  | date('H:i') }} | {{ horaire.ouvertureSoir  | date('H:i') }}-{{ horaire.fermetureSoir  | date('H:i') }}</li>
+                <div class="d-flex justify-content-between">
+                    <ul class="list-unstyled d-flex flex-column align-items-start">
+                        <li>Lundi</li>
+                        <li>Mardi</li>
+                        <li>Mercredi</li>
+                        <li>Jeudi</li>
+                        <li>Vendredi</li>
+                        <li>Samedi</li>
+                        <li>Dimanche</li>
+                    </ul>
+                    <ul class="list-unstyled d-flex flex-column align-items-start">
+                        {% for horaire in horaires %}
+                            {% if horaire.ouvert == true %}
+                                <li>{{ horaire.ouvertureMidi | date('H:i') }}-{{ horaire.fermetureMidi  | date('H:i') }} | {{ horaire.ouvertureSoir  | date('H:i') }}-{{ horaire.fermetureSoir  | date('H:i') }}</li>
                             {% else %}
-                            <li>{{ horaire.jour }} : Fermé</li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
+                                <li> Fermé</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
             <div class="col-md-3 mb-md-0 mb-3">
                 <h5 class="text-uppercase mb-4">ADRESSE</h5>
