@@ -54,7 +54,7 @@ class HomeController extends AbstractController
         // Création d'une nouvelle instance de l'entité Reservations
         $reservation = new Reservations();
         $reservation->setDate(new \DateTime()); // Permet de mettre une date par défaut au formulaire de réservation
-        $reservation->setHeure(new \DateTime());
+        $reservation->setHeure(new \DateTime());// Permet de mettre une heure par défaut au formulaire de réservation
 
         // Récupère l'information enregistrée par défaut (Nombre de convives/allergies) par l'utilisateur connecté lors de son inscription
         if($this->isGranted('IS_AUTHENTICATED_FULLY') || $this->isGranted('ROLE_ADMIN')){
@@ -106,7 +106,6 @@ class HomeController extends AbstractController
         }
         // Sinon affiche un message d'erreur.
         elseif ($maxReservationPerDayValue < ($nbrCouvertMidi + $nbrCouvertSelectionne) || $maxReservationPerDayValue < ($nbrCouvertSoir + $nbrCouvertSelectionne) ) {
-//            dd($nbrCouvertMidi , $nbrCouvertSoir);
             $this->addFlash('full', 'Il n\'y a plus de place disponible à cette date');
             return $this->redirectToRoute('app_home');
         }

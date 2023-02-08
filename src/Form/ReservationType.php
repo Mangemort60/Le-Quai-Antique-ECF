@@ -23,7 +23,6 @@ class ReservationType extends AbstractType
                 'label' => 'Nombre de couvert'
             ])
             ->add('date', DateType::class, [
-                'html5' => false,
                 'placeholder' => [
                     'year' => 'Year',
                     'month' => 'Month',
@@ -51,7 +50,6 @@ class ReservationType extends AbstractType
 
             ])
             ->add('soumettre', SubmitType::class)
-//            ->add('User')
         ;
     }
 
