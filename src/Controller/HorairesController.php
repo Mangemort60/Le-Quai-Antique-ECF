@@ -11,7 +11,7 @@ class HorairesController extends AbstractController
 {
 
     // Action pour afficher les horaires
-    #[Route('/horaires', name: 'app_horaires_afficherhoraires')]
+    #[Route('/horaires', name: 'app_horaires')]
     public function afficherHoraires(HorairesRepository $horairesRepository): Response
     {
         // Récupère et affiche les horaires en base de données
