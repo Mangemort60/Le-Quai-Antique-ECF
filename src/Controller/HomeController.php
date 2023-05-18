@@ -46,7 +46,7 @@ class HomeController extends AbstractController
 
         // Récupère le nombre de couverts maximum fixé en base de données dans la table PlacesMax
         $maxReservationPerDay = $placesMaxRepository->findOneBy(['id' => '1']); // Méthode pour récupérer l'unique ligne de la table.
-        $maxReservationPerDayValue = $maxReservationPerDay->getNbrPlacesMax();
+        $maxReservationPerDayValue = $maxReservationPerDay->getNbrPlacesMax(); // récupère la valeur nbrPlacesMax
 
         // Récupère toutes les données de la table carte en base de données
         $plat = $carteRepository->findAll();

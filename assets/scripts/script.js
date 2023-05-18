@@ -19,8 +19,10 @@ filterButtons.forEach(button => {
             // sinon cacher tous les éléments
             items.forEach(item => item.style.display = 'none');
 
-            // et ne montrer que celui qui est sélectionné
-            document.querySelectorAll(`[data-category="${filter}"]`).forEach(item => item.style.display = 'block');
+            // et ne montrer que celui qui est sélectionné, pour ça on sélectionne tous les attributs data-category dont la valeur correspond
+            // à la catégorie sélectionnée par l'utilisateur et on affiche les éléments.
+            const selectedItem = document.querySelector(`[data-category="${filter}"]`);
+            selectedItem.style.display = 'block';
         }
     });
 });
