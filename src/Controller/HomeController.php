@@ -86,7 +86,7 @@ class HomeController extends AbstractController
 
         // Recuperation du nombre de couverts à une date sélectionnée pour le service du soir
         $nbrCouvertSoir = $reservationsRepository->countNbrCouvertDateSoir($reservationDate, $reservationHeure);
-//        dd($nbrCouvertSoir);
+
 
         // Vérifie si formulaire valide, et si assez de place à la date et l'heure sélectionnée
         if ($form->isSubmitted()
@@ -107,6 +107,7 @@ class HomeController extends AbstractController
         // Sinon affiche un message d'erreur.
         elseif (($maxReservationPerDayValue - $nbrCouvertMidi) < $nbrCouvertSelectionne
     || ($maxReservationPerDayValue - $nbrCouvertSoir) < $nbrCouvertSelectionne ) {
+
             $this->addFlash('full', 'Il n\'y a plus de place disponible à cette date');
             return $this->redirectToRoute('app_home');
         }
