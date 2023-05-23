@@ -77,6 +77,7 @@ class HomeController extends AbstractController
         $reservationHeure = $data->getHeure();
         $nbrCouvertSelectionne = $data->getnbrCouvert();
 
+
         // Formatage de la date et l'heure pour qu'elle puisse être passée au custom QueryBuilder countNbrCouvertForDate()
         $reservationDate = $reservationDate->format('Y-m-d');
         $reservationHeure = $reservationHeure->format('H:m:s');
@@ -105,9 +106,9 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
         // Sinon affiche un message d'erreur.
-        elseif (($maxReservationPerDayValue - $nbrCouvertMidi) < $nbrCouvertSelectionne
+        if (($maxReservationPerDayValue - $nbrCouvertMidi) < $nbrCouvertSelectionne
     || ($maxReservationPerDayValue - $nbrCouvertSoir) < $nbrCouvertSelectionne ) {
-
+//            dd($nbrCouvertSelectionne);
             $this->addFlash('full', 'Il n\'y a plus de place disponible à cette date');
             return $this->redirectToRoute('app_home');
         }
