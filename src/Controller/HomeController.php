@@ -105,7 +105,8 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
         // Sinon affiche un message d'erreur.
-        elseif ($maxReservationPerDayValue < ($nbrCouvertMidi + $nbrCouvertSelectionne) || $maxReservationPerDayValue < ($nbrCouvertSoir + $nbrCouvertSelectionne) ) {
+        elseif (($maxReservationPerDayValue - $nbrCouvertMidi) < $nbrCouvertSelectionne
+    || ($maxReservationPerDayValue - $nbrCouvertSoir) < $nbrCouvertSelectionne ) {
             $this->addFlash('full', 'Il n\'y a plus de place disponible à cette date');
             return $this->redirectToRoute('app_home');
         }
