@@ -91,8 +91,8 @@ class HomeController extends AbstractController
         // Vérifie si formulaire valide, et si assez de place à la date et l'heure sélectionnée
         if ($form->isSubmitted()
             && $form->isValid()
-            && $maxReservationPerDayValue >= ($nbrCouvertMidi + $nbrCouvertSelectionne)
-            && $maxReservationPerDayValue >= ($nbrCouvertSoir + $nbrCouvertSelectionne))
+            && ($maxReservationPerDayValue - $nbrCouvertMidi) >= $nbrCouvertSelectionne
+            && ($maxReservationPerDayValue - $nbrCouvertSoir) >= $nbrCouvertSelectionne)
         {
             // Recuperation de l'email du client
             $mailUser = $this->getUserOrGuestIdentifier($security);
@@ -101,7 +101,7 @@ class HomeController extends AbstractController
             // Enregistrement en base de données et affichage d'un message de confirmation
             $entityManager->persist($reservation);
             $entityManager->flush();
-            $this->addFlash('success', 'Merci, votre réservation a bien été prise en compte');
+            $this->addFlash('successMessage', 'Merci, votre réservation a bien été prise en compte');
             return $this->redirectToRoute('app_home');
         }
         // Sinon affiche un message d'erreur.
@@ -121,3 +121,5 @@ class HomeController extends AbstractController
 
 
 }
+
+
