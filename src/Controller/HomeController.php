@@ -89,10 +89,10 @@ class HomeController extends AbstractController
 //        dd($nbrCouvertSoir);
 
         // Vérifie si formulaire valide, et si assez de place à la date et l'heure sélectionnée
-        if ($form->isSubmitted()
-            && $form->isValid()
-            && $maxReservationPerDayValue >= ($nbrCouvertMidi + $nbrCouvertSelectionne)
-            && $maxReservationPerDayValue >= ($nbrCouvertSoir + $nbrCouvertSelectionne))
+if ($form->isSubmitted()
+    && $form->isValid()
+    && ($maxReservationPerDayValue - $nbrCouvertMidi) >= $nbrCouvertSelectionne
+    && ($maxReservationPerDayValue - $nbrCouvertSoir) >= $nbrCouvertSelectionne)
         {
             // Recuperation de l'email du client
             $mailUser = $this->getUserOrGuestIdentifier($security);
