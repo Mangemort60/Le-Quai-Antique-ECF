@@ -56,6 +56,7 @@ class Reservations
 
     public function setDate(\DateTimeInterface $date): self
     {
+        $date->setTime(0, 0, 0);
         $this->date = $date;
 
         return $this;
