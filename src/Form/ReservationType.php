@@ -38,8 +38,6 @@ class ReservationType extends AbstractType
                     'widget' => 'choice',
                     'hours' => ['12', '13', '14', '19', '20', '21'],
                     'minutes' => ['00', '15','30','45']
-
-
                 ]
 
             )

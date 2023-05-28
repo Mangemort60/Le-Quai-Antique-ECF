@@ -53,7 +53,8 @@ class HomeController extends AbstractController
 
         // Création d'une nouvelle instance de l'entité Reservations
         $reservation = new Reservations();
-        $reservation->setDate(new \DateTime()); // Permet de mettre une date par défaut au formulaire de réservation
+        // $reservation->setDate(new \DateTime()); // Permet de mettre une date par défaut au formulaire de réservation
+        $reservation->setDate(\DateTime::createFromFormat('Y-m-d', date('Y-m-d')));
         $reservation->setHeure(new \DateTime());// Permet de mettre une heure par défaut au formulaire de réservation
 
         // Récupère l'information enregistrée par défaut (Nombre de convives/allergies) par l'utilisateur connecté lors de son inscription
