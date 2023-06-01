@@ -34,7 +34,7 @@ class ReservationType extends AbstractType
             ])
             ->add('heure', TimeType::class,
                 [
-                    'input_format' => 'H:m',
+                    'input_format' => 'H:m:ss',
                     'input'  => 'datetime',
                     'widget' => 'choice',
                     'hours' => ['12', '13', '14', '19', '20', '21'],
