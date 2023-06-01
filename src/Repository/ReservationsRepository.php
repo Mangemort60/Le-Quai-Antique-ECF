@@ -72,9 +72,11 @@ class ReservationsRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('r')
             ->select('SUM(r.nbrCouvert)')
             ->where('r.date = :date')
-            ->andWhere('r.heure < :heure')
+            ->andWhere('r.heure >= :heureDebut')
+            ->andWhere('r.heure <= :heureFin')
             ->setParameter('date', $date)
-            ->setParameter('heure', $heure);
+            ->setParameter('heureDebut', '12:00:00') // Heure de début du service du midi
+            ->setParameter('heureFin', '14:00:00');
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -85,9 +87,11 @@ class ReservationsRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('r')
             ->select('SUM(r.nbrCouvert)')
             ->where('r.date = :date')
-            ->andWhere('r.heure > :heure')
+            ->andWhere('r.heure >= :heureDebut')
+            ->andWhere('r.heure <= :heureFin')
             ->setParameter('date', $date)
-            ->setParameter('heure', $heure);
+            ->setParameter('heureDebut', '19:00:00') // Heure de début du service du soir
+            ->setParameter('heureFin', '21:00:00');
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
