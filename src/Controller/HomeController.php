@@ -36,20 +36,15 @@ class HomeController extends AbstractController
                           ManagerRegistry $managerRegistry, // Gestion des entités
                           ReservationsRepository $reservationsRepository,
                           PlacesMaxRepository $placesMaxRepository,
-                          Security $security, // Récupère l'utilisateur connecté
+                          Security $security // Récupère l'utilisateur connecté
     ): Response
     {
         // Récupère le gestionnaire d'entité
         $entityManager = $managerRegistry->getManager();
-
-
         // Récupère le nombre de couverts maximum fixé en base de données dans la table PlacesMax
-        $maxReservationPerDay = $placesMaxRepository->findOneBy(['id' => '1']); // Méthode pour récupérer l'unique ligne de la table.
-        $maxReservationPerDayValue = $maxReservationPerDay->getNbrPlacesMax(); // récupère la valeur nbrPlacesMax
-
+        $placesMax = $placesMaxRepository->getPlaceMaxValue() ;// récupère la valeur nbrPlacesMax
         // Récupère toutes les données de la table carte en base de données
         $plat = $carteRepository->findAll();
-
         // Création d'une nouvelle instance de l'entité Reservations
         $reservation = new Reservations();
         $reservation->setDate(new \DateTime()); // Permet de mettre une date par défaut au formulaire de réservation
@@ -60,11 +55,11 @@ class HomeController extends AbstractController
             $user = $security->getUser();
             $allergieUser = $user->getAllergies();
             $nbrCouvertUser = $user->getNbrConvive();
-            $reservation->setNbrCouvert(intval($nbrCouvertUser)); // setNbrCouvert demande un integer, mais si la valeur est null pour l'utilisateur alors cela déclenche une erreur, j'ai donc utilisé la methode intval()
+            if($nbrCouvertUser){
+                $reservation->setNbrCouvert($nbrCouvertUser);
+            }
             $reservation->setAllergie($allergieUser);
         }
-
-
 
         // Création du formulaire et liaison avec l'entité correspondante
         $form = $this->createForm(ReservationType::class, $reservation);
@@ -91,8 +86,8 @@ class HomeController extends AbstractController
         // Vérifie si formulaire valide, et si assez de place à la date et l'heure sélectionnée
         if ($form->isSubmitted()
             && $form->isValid()
-            && ($maxReservationPerDayValue - $nbrCouvertMidi) >= $nbrCouvertSelectionne
-            && ($maxReservationPerDayValue - $nbrCouvertSoir) >= $nbrCouvertSelectionne)
+            && ($placesMax - $nbrCouvertMidi) >= $nbrCouvertSelectionne
+            && ($placesMax- $nbrCouvertSoir) >= $nbrCouvertSelectionne)
         {
             // Recuperation de l'email du client
             $mailUser = $this->getUserOrGuestIdentifier($security);
@@ -105,8 +100,8 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
         // Sinon affiche un message d'erreur.
-        elseif (($maxReservationPerDayValue - $nbrCouvertMidi) < $nbrCouvertSelectionne
-    || ($maxReservationPerDayValue - $nbrCouvertSoir) < $nbrCouvertSelectionne ) {
+        elseif (($placesMax - $nbrCouvertMidi) < $nbrCouvertSelectionne
+    || ($placesMax - $nbrCouvertSoir) < $nbrCouvertSelectionne ) {
 
             $this->addFlash('full', 'Il n\'y a plus de place disponible à cette date');
             return $this->redirectToRoute('app_home');
@@ -118,10 +113,6 @@ class HomeController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
-
-
-
 }
 
 

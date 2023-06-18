@@ -21,7 +21,8 @@ class ReservationType extends AbstractType
         $builder
             ->add('nbrCouvert', IntegerType::class, [
                 'label' => 'Nombre de couvert',
-                'attr' => ['min' => 1, 'max' => 10]
+                'attr' => ['min' => 1, 'max' => 10],
+
             ])
             ->add('date', DateType::class, [
                 'placeholder' => [

@@ -54,7 +54,8 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('nbrConvive', IntegerType::class, [
-                'label' => 'Nombre de convives habituels'
+                'label' => 'Nombre de convives habituels',
+                'required' => false
             ])
             ->add('allergies', TextType::class)
             ->add('soumettre', SubmitType::class)

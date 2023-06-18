@@ -54,13 +54,13 @@ class PlacesMaxRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?PlacesMax
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function getPlaceMaxValue(): int
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->select('p.nbrPlacesMax')
+            ->andWhere('p.id = :val')
+            ->setParameter('val', '1');
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
 }

@@ -15,10 +15,10 @@ class CarteController extends AbstractController
     public function index(CarteRepository $carteRepository): Response
     {
         // Récupération tout le contenu de la table carte en base de données
-        $plat = $carteRepository->findAll();
+        $plats = $carteRepository->findAll();
         // Affiche la vue Twig avec le contenu de la table carte
         return $this->render('carte/index.html.twig', [
-            'plats' => $plat,
+            'plats' => $plats,
         ]);
     }
 }
